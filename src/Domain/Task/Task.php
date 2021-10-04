@@ -80,7 +80,7 @@ class Task
     /**
      * @return MyDate
      */
-    public function getDate(): MyDate
+    public function getMyDate(): MyDate
     {
         return $this->date;
     }
@@ -110,7 +110,7 @@ class Task
             'id' => $this->id,
             'userId' => $this->userId,
             'description' => $this->description,
-            'date' => $this->getDate()->getDate(),
+            'date' => $this->getMyDate()->getDate(),
             'completed' => $this->completed,
         ];
     }

@@ -45,7 +45,7 @@ class InMemoryTaskRepository implements TaskRepository
         $tasks = array_filter($this->tasks,
             function ($task) use ($userId, $date) {
                 return $task->getUserId() == $userId
-                && $task->getDate() == $date;
+                && $task->getMyDate() == $date;
             });
 
         return array_values($tasks);

@@ -47,7 +47,7 @@ class TaskTest extends TestCase
         $this->assertEquals($id, $task->getId());
         $this->assertEquals($userId, $task->getUserId());
         $this->assertEquals($description, $task->getDescription());
-        $this->assertEquals($date, $task->getDate());
+        $this->assertEquals($date, $task->getMyDate());
         $this->assertEquals($completed, $task->getCompleted());
     }
 
