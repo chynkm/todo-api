@@ -6,6 +6,7 @@ use Psr\Container\ContainerInterface;
 use Slim\App;
 use Slim\Factory\AppFactory;
 use Slim\Middleware\ErrorMiddleware;
+use Slim\Views\PhpRenderer;
 
 return [
     'settings' => function () {
@@ -35,4 +36,7 @@ return [
         return $container->get(InMemoryTaskRepository::class);
     },
 
+    PhpRenderer::class => function (ContainerInterface $container) {
+        return new PhpRenderer($container->get('settings')['view']['path']);
+    },
 ];

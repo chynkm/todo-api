@@ -15,4 +15,8 @@ $settings['error'] = [
     'log_error_details' => true,
 ];
 
+$settings['view'] = [
+    'path' => __DIR__ . '/../templates',
+];
+
 return $settings;
