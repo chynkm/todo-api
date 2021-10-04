@@ -14,7 +14,7 @@
 ### Development environment
 - `composer install`
 - Running tests: `composer test`
-- Running the application with in Built-in web server: `php -S 127.0.0.1:8080 -t public`
+- Running the application with built-in web server: `php -S 127.0.0.1:8080 -t public`
 - Point your browser address bar to `http://127.0.0.1:8080/docs` to view the API specifications
 
 ### Example API requests
