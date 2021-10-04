@@ -4,6 +4,8 @@ use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Slim\App;
 
+$app->get('/tasks/{userId}', \App\Action\TaskListAction::class);
+
 return function (App $app) {
     $app->get('/', function (
         ServerRequestInterface $request,

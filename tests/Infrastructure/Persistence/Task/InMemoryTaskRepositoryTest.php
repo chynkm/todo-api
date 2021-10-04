@@ -5,6 +5,7 @@ namespace App\Test\Infrastructure\Persistence\Task;
 
 use App\Domain\Task\Task;
 use App\Domain\Task\TaskNotFoundException;
+use App\Domain\User\UserNotFoundException;
 use App\Domain\ValueObject\MyDate;
 use App\Infrastructure\Persistence\Task\InMemoryTaskRepository;
 use PHPUnit\Framework\TestCase;
@@ -37,7 +38,7 @@ class InMemoryTaskRepositoryTest extends TestCase
 
         $this->assertEquals(
             [$tasks[4]],
-            $taskRepository->findByUserId(4, new MyDate('2021-09-22'))
+            $taskRepository->findByUserIdAndDate(4, new MyDate('2021-09-22'))
         );
 
         $user5Tasks = [];
@@ -46,7 +47,7 @@ class InMemoryTaskRepositoryTest extends TestCase
 
         $this->assertEquals(
             $user5Tasks,
-            $taskRepository->findByUserId(5, new MyDate('2021-09-27'))
+            $taskRepository->findByUserIdAndDate(5, new MyDate('2021-09-27'))
         );
     }
 
@@ -55,6 +56,14 @@ class InMemoryTaskRepositoryTest extends TestCase
         $taskRepository = new InMemoryTaskRepository([]);
         $this->expectException(TaskNotFoundException::class);
         $taskRepository->findById(1);
+    }
+
+    public function testFindByUserIdThrowsNotFoundException()
+    {
+        $task = new Task(1, 1, 'First task', new MyDate('2021-10-01'), null);
+        $taskRepository = new InMemoryTaskRepository([1 => $task]);
+        $this->expectException(UserNotFoundException::class);
+        $taskRepository->existsUserId(2);
     }
 
     public function testCompleteById()

@@ -6,6 +6,7 @@ namespace App\Infrastructure\Persistence\Task;
 use App\Domain\Task\Task;
 use App\Domain\Task\TaskNotFoundException;
 use App\Domain\Task\TaskRepository;
+use App\Domain\User\UserNotFoundException;
 use App\Domain\ValueObject\MyDate;
 
 class InMemoryTaskRepository implements TaskRepository
@@ -26,8 +27,10 @@ class InMemoryTaskRepository implements TaskRepository
         ];
     }
 
-    public function findByUserId(int $userId, MyDate $date): array
+    public function findByUserIdAndDate(int $userId, MyDate $date): array
     {
+        $this->existsUserId($userId);
+
         $tasks = array_filter($this->tasks,
             function ($task) use ($userId, $date) {
                 return $task->getUserId() == $userId
@@ -54,5 +57,17 @@ class InMemoryTaskRepository implements TaskRepository
 
         $this->tasks[$id]->markCompleted();
         return $this->tasks[$id];
+    }
+
+    public function existsUserId(int $userId): void
+    {
+        $tasks = array_filter($this->tasks,
+            function ($task) use ($userId) {
+                return $task->getUserId() == $userId;
+            });
+
+        if ((bool) $tasks === false) {
+            throw new UserNotFoundException();
+        }
     }
 }

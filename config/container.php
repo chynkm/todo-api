@@ -1,5 +1,7 @@
 <?php
 
+use App\Domain\Task\TaskRepository;
+use App\Infrastructure\Persistence\Task\InMemoryTaskRepository;
 use Psr\Container\ContainerInterface;
 use Slim\App;
 use Slim\Factory\AppFactory;
@@ -27,6 +29,10 @@ return [
             (bool) $settings['log_errors'],
             (bool) $settings['log_error_details']
         );
+    },
+
+    TaskRepository::class => function (ContainerInterface $container) {
+        return $container->get(InMemoryTaskRepository::class);
     },
 
 ];

@@ -11,14 +11,14 @@ interface TaskRepository
     /**
      * @param int $id
      * @return Task
-     * @throws TaskNotFoundException
+     * @throws App\Domain\Task\TaskNotFoundException
      */
     public function findById(int $id): Task;
 
     /**
      * @return Task[]
      */
-    public function findByUserId(int $userId, MyDate $date): array;
+    public function findByUserIdAndDate(int $userId, MyDate $date): array;
 
     /**
      * @param int $id
@@ -26,4 +26,11 @@ interface TaskRepository
      * @throws TaskNotFoundException
      */
     public function markCompletedById(int $id): Task;
+
+    /**
+     * @param int $userId
+     * @return void
+     * @throws App\Domain\User\UserNotFoundException
+     */
+    public function existsUserId(int $userId): void;
 }
