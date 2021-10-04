@@ -59,7 +59,10 @@ class InMemoryTaskRepository implements TaskRepository
     public function findById(int $id): Task
     {
         if (!isset($this->tasks[$id])) {
-            throw new TaskNotFoundException();
+            throw new TaskNotFoundException(
+                'Requested Task not found',
+                ['id' => 'The task you requested does not exist.']
+            );
         }
 
         return $this->tasks[$id];
@@ -73,7 +76,10 @@ class InMemoryTaskRepository implements TaskRepository
     public function markCompletedById(int $id): Task
     {
         if (!isset($this->tasks[$id])) {
-            throw new TaskNotFoundException();
+            throw new TaskNotFoundException(
+                'Requested Task not found',
+                ['id' => 'The task you requested does not exist.']
+            );
         }
 
         $this->tasks[$id]->markCompleted();
@@ -93,7 +99,10 @@ class InMemoryTaskRepository implements TaskRepository
             });
 
         if ((bool) $tasks === false) {
-            throw new UserNotFoundException();
+            throw new UserNotFoundException(
+                'Requested User not found',
+                ['userId' => 'The user you requested does not exist.']
+            );
         }
     }
 }

@@ -4,6 +4,7 @@
 
 namespace App\Handler;
 
+use App\Exception\ResourceNotFoundException;
 use App\Exception\ValidationException;
 use Exception;
 use Psr\Http\Message\ResponseInterface;
@@ -40,6 +41,11 @@ class HttpErrorHandler extends ErrorHandler
 
         if ($exception instanceof ValidationException) {
             $statusCode = 422;
+            $description = $exception->getErrors();
+        }
+
+        if ($exception instanceof ResourceNotFoundException) {
+            $statusCode = 404;
             $description = $exception->getErrors();
         }
 

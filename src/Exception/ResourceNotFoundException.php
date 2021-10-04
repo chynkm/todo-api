@@ -3,10 +3,10 @@ declare (strict_types = 1);
 
 namespace App\Exception;
 
-use RuntimeException;
+use Exception;
 use Throwable;
 
-final class ValidationException extends RuntimeException
+class ResourceNotFoundException extends \Exception
 {
     /**
      * @var array<string, string>
@@ -22,7 +22,7 @@ final class ValidationException extends RuntimeException
     public function __construct(
         string $message,
         array $errors = [],
-        int $code = 422,
+        int $code = 404,
         Throwable $previous = null
     ) {
         parent::__construct($message, $code, $previous);

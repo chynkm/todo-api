@@ -38,16 +38,16 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Error"
-  /tasks/{taskId}/complete:
+  /tasks/{id}/complete:
     put:
       summary: Complete a task
       tags:
         - tasks
       parameters:
-        - name: taskId
+        - name: id
           in: path
           required: true
-          description: The task-id to be completed
+          description: The task-id to be marked as completed
           schema:
             type: int
       responses:
