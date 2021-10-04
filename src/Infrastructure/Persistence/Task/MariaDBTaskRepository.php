@@ -35,7 +35,7 @@ class MariaDBTaskRepository implements TaskRepository
         $query = $this->connection->createQueryBuilder();
 
         $row = $query
-            ->select('id', 'user_id', 'task', 'date', 'completed')
+            ->select('id', 'user_id', 'description', 'date', 'completed')
             ->from('tasks')
             ->where('id = :id')
             ->setParameter('id', $id)
@@ -52,7 +52,7 @@ class MariaDBTaskRepository implements TaskRepository
         return new Task(
             (int) $row['id'],
             (int) $row['user_id'],
-            $row['task'],
+            $row['description'],
             new MyDate($row['date']),
             $row['completed'],
         );
@@ -67,7 +67,7 @@ class MariaDBTaskRepository implements TaskRepository
         $query = $this->connection->createQueryBuilder();
 
         $rows = $query
-            ->select('id', 'user_id', 'task', 'date', 'completed')
+            ->select('id', 'user_id', 'description', 'date', 'completed')
             ->from('tasks')
             ->where('user_id = :userId')
             ->setParameter('userId', $userId)
@@ -82,7 +82,7 @@ class MariaDBTaskRepository implements TaskRepository
             $tasks[] = new Task(
                 (int) $row['id'],
                 (int) $row['user_id'],
-                $row['task'],
+                $row['description'],
                 new MyDate($row['date']),
                 $row['completed'],
             );
