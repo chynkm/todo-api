@@ -13,7 +13,7 @@ use PHPUnit\Framework\TestCase;
 class InMemoryTaskRepositoryTest extends TestCase
 {
 
-    public function testFindById()
+    public function testFindById(): void
     {
         $task = new Task(1, 1, 'First task', new MyDate('2021-10-01'), null);
 
@@ -22,7 +22,7 @@ class InMemoryTaskRepositoryTest extends TestCase
         $this->assertEquals($task, $taskRepository->findById(1));
     }
 
-    public function testFindAllTasksOfAUserForADate()
+    public function testFindAllTasksOfAUserForADate(): void
     {
         $tasks = [
             1 => new Task(1, 1, 'First task', new MyDate('2021-10-01'), null),
@@ -51,14 +51,14 @@ class InMemoryTaskRepositoryTest extends TestCase
         );
     }
 
-    public function testFindByIdThrowsNotFoundException()
+    public function testFindByIdThrowsNotFoundException(): void
     {
         $taskRepository = new InMemoryTaskRepository([]);
         $this->expectException(TaskNotFoundException::class);
         $taskRepository->findById(1);
     }
 
-    public function testFindByUserIdThrowsNotFoundException()
+    public function testFindByUserIdThrowsNotFoundException(): void
     {
         $task = new Task(1, 1, 'First task', new MyDate('2021-10-01'), null);
         $taskRepository = new InMemoryTaskRepository([1 => $task]);
@@ -66,7 +66,7 @@ class InMemoryTaskRepositoryTest extends TestCase
         $taskRepository->existsUserId(2);
     }
 
-    public function testCompleteById()
+    public function testCompleteById(): void
     {
         $task = new Task(1, 1, 'First task', new MyDate('2021-10-01'), null);
         $taskRepository = new InMemoryTaskRepository([1 => $task]);
@@ -78,7 +78,7 @@ class InMemoryTaskRepositoryTest extends TestCase
         $this->assertNotNull($completedTask->getCompleted());
     }
 
-    public function testCompleteByIdThrowsNotFoundException()
+    public function testCompleteByIdThrowsNotFoundException(): void
     {
         $taskRepository = new InMemoryTaskRepository([]);
         $this->expectException(TaskNotFoundException::class);

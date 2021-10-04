@@ -11,8 +11,14 @@ use App\Domain\ValueObject\MyDate;
 
 class InMemoryTaskRepository implements TaskRepository
 {
+    /**
+     * @var array<int, Task>
+     */
     private $tasks;
 
+    /**
+     * @param array<int, Task>|null $tasks
+     */
     public function __construct(array $tasks = null)
     {
         $this->tasks = $tasks ?? [
@@ -27,6 +33,11 @@ class InMemoryTaskRepository implements TaskRepository
         ];
     }
 
+    /**
+     * @param  int    $userId
+     * @param  MyDate $date
+     * @return array<Task>
+     */
     public function findByUserIdAndDate(int $userId, MyDate $date): array
     {
         $this->existsUserId($userId);
@@ -40,6 +51,11 @@ class InMemoryTaskRepository implements TaskRepository
         return array_values($tasks);
     }
 
+    /**
+     * @param  int    $id
+     * @return Task
+     * @throws \App\Domain\Task\TaskNotFoundException
+     */
     public function findById(int $id): Task
     {
         if (!isset($this->tasks[$id])) {
@@ -49,6 +65,11 @@ class InMemoryTaskRepository implements TaskRepository
         return $this->tasks[$id];
     }
 
+    /**
+     * @param  int    $id
+     * @return Task
+     * @throws \App\Domain\Task\TaskNotFoundException
+     */
     public function markCompletedById(int $id): Task
     {
         if (!isset($this->tasks[$id])) {
@@ -59,6 +80,11 @@ class InMemoryTaskRepository implements TaskRepository
         return $this->tasks[$id];
     }
 
+    /**
+     * @param  int    $userId
+     * @return void
+     * @throws \App\Domain\User\UserNotFoundException
+     */
     public function existsUserId(int $userId): void
     {
         $tasks = array_filter($this->tasks,

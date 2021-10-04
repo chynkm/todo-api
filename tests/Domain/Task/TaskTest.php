@@ -9,7 +9,10 @@ use PHPUnit\Framework\TestCase;
 
 class TaskTest extends TestCase
 {
-    public function taskProvider()
+    /**
+     * @return array<int, array>
+     */
+    public function taskProvider(): array
     {
         return [
             [1, 1, 'First task', new MyDate('2021-10-01'), null],
@@ -27,7 +30,7 @@ class TaskTest extends TestCase
      * @dataProvider taskProvider
      *
      * @param int    $id
-     * @param string $userId
+     * @param int    $userId
      * @param string $description
      * @param MyDate $date
      * @param string $completed
@@ -48,7 +51,7 @@ class TaskTest extends TestCase
         $this->assertEquals($completed, $task->getCompleted());
     }
 
-    public function testMarkCompleted()
+    public function testMarkCompleted(): void
     {
         $task = new Task(1, 1, 'First task', new MyDate('2021-10-01'), null);
 
@@ -56,7 +59,7 @@ class TaskTest extends TestCase
         $this->assertNotNull($task->getCompleted());
     }
 
-    public function testTaskToArray()
+    public function testTaskToArray(): void
     {
         $task = new Task(1, 1, 'First task', new MyDate('2021-10-01'), null);
         $got = $task->toArray();

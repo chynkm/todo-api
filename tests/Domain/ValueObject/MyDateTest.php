@@ -9,6 +9,9 @@ use PHPUnit\Framework\TestCase;
 
 class MyDateTest extends TestCase
 {
+    /**
+     * @return array<int, array>
+     */
     public function invalidDatesProvider(): array
     {
         return [
@@ -25,12 +28,15 @@ class MyDateTest extends TestCase
     /**
      * @dataProvider invalidDatesProvider
      */
-    public function testInvalidDateFormat($invalidDate): void
+    public function testInvalidDateFormat(string $invalidDate): void
     {
         $this->expectException(ValidationException::class);
         new MyDate($invalidDate);
     }
 
+    /**
+     * @return array<int, array>
+     */
     public function validDatesProvider(): array
     {
         return [
@@ -42,7 +48,7 @@ class MyDateTest extends TestCase
     /**
      * @dataProvider validDatesProvider
      */
-    public function testValidDateFormat($validDate): void
+    public function testValidDateFormat(string $validDate): void
     {
         $myDate = new MyDate($validDate);
         $this->assertEquals($validDate, $myDate->getDate());

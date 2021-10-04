@@ -13,6 +13,9 @@ use Throwable;
 
 class HttpErrorHandler extends ErrorHandler
 {
+    /**
+     * @return ResponseInterface
+     */
     protected function respond(): ResponseInterface
     {
         $exception = $this->exception;
