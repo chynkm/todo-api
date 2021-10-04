@@ -17,6 +17,13 @@
 - Running the application with in Built-in web server: `php -S 127.0.0.1:8080 -t public`
 - Point your browser address bar to `http://127.0.0.1:8080/docs` to view the API specifications
 
+### Example API requests
+GET
+- `http://127.0.0.1:8080/tasks/1?date=2021-10-01`
+- `http://127.0.0.1:8080/tasks/5?date=2021-09-27`
+
+PUT
+- `http://127.0.0.1:8080/tasks/4/complete`
 
 ## Configuring database
 - I have used MariaDB v10.5
